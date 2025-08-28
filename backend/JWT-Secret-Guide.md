@@ -1,5 +1,60 @@
 # JWT Secret Token Guide
 
+## In This Project
+
+### 1. Register a User (Public Endpoint)
+
+POST: `http://localhost:5000/api/users/register`
+
+```json
+{
+  "username": "Kisara",
+  "email": "Kisara@vk.com",
+  "password": "password"
+}
+```
+Response:
+```json
+{
+	"_id": "68b026c2deabe7635d1e9d52",
+	"email": "Kisara@vk.com"
+}
+```
+
+### 2. Login and get Access Token (Public Endpoint)
+
+POST: `http://localhost:5000/api/users/login`
+
+```json
+{
+  "email": "Kisara@vk.com",
+  "password": "password"
+}
+```
+Response:
+```json
+{
+	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiRnJhbnoiLCJlbWFpbCI6IkZyYW56QHZrLmNvbSIsImlkIjoiNjhiMDI2YzJkZWFiZTc2MzVkMWU5ZDUyIn0sImlhdCI6MTc1NjM3NTI4OSwiZXhwIjoxNzU2Mzc2MTg5fQ.w0hQvBSoBqz9Kixek4NRhdt2NROxy33UIoaHgoPg4Wo"
+}
+```
+
+### 3. Access Protected Routes
+
+GET: `http://localhost:5000/api/users/current`
+
+Headers:
+Key: `Authorization`
+Value: `Bearer <accessToken>`
+
+Response:
+```json
+{
+	"username": "Kisara",
+	"email": "Kisara@vk.com",
+	"id": "68b026c2deabe7635d1e9d52"
+}
+```
+
 ## What is a JWT Token?
 
 **JWT (JSON Web Token)** is a compact, URL-safe token format used for securely transmitting information between parties. A JWT token consists of three parts separated by dots (`.`):
